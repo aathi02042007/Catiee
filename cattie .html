@@ -1,0 +1,1255 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>about cattie ❤️</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600&family=DM+Sans:wght@300;400;500&family=Dancing+Script:wght@600;700&display=swap" rel="stylesheet"/>
+<style>
+  :root {
+    --rose: #f4a7b9;
+    --rose-deep: #e879a0;
+    --lavender: #c9b8f0;
+    --lavender-deep: #a78bda;
+    --blush: #fde8ef;
+    --cream: #fff8fb;
+    --white: #ffffff;
+    --text: #3d2a3a;
+    --text-soft: #8b6f7e;
+    --glass: rgba(255,255,255,0.55);
+    --glass-border: rgba(255,255,255,0.7);
+    --shadow: rgba(200,130,170,0.18);
+    --shadow-deep: rgba(180,100,150,0.28);
+    --gradient: linear-gradient(135deg, #fde8ef 0%, #f0e6ff 50%, #fce4f0 100%);
+    --gradient-card: linear-gradient(145deg, rgba(255,255,255,0.7), rgba(255,235,248,0.4));
+    --accent: #e879a0;
+  }
+  [data-dark] {
+    --cream: #1a0f18;
+    --blush: #241520;
+    --white: #2d1a28;
+    --text: #f5dce8;
+    --text-soft: #c9a0b8;
+    --glass: rgba(40,20,35,0.65);
+    --glass-border: rgba(200,130,170,0.25);
+    --gradient: linear-gradient(135deg, #1a0f18 0%, #1e1228 50%, #1a0f18 100%);
+    --gradient-card: linear-gradient(145deg, rgba(50,25,45,0.8), rgba(35,15,30,0.6));
+    --shadow: rgba(244,167,185,0.12);
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--gradient);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+    transition: background 0.5s, color 0.5s;
+  }
+
+  /* ── CANVAS BACKGROUND ── */
+  #bg-canvas { position: fixed; inset: 0; z-index: 0; pointer-events: none; }
+
+  /* ── PROGRESS BAR ── */
+  #progress-bar {
+    position: fixed; top: 0; left: 0; height: 3px; z-index: 1000;
+    background: linear-gradient(90deg, var(--rose), var(--lavender-deep), var(--rose-deep));
+    width: 0%; transition: width 0.6s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 0 12px var(--rose);
+  }
+
+  /* ── TOP NAV ── */
+  #top-nav {
+    position: fixed; top: 12px; right: 16px; z-index: 999;
+    display: flex; gap: 10px; align-items: center;
+  }
+  .nav-btn {
+    background: var(--glass); border: 1px solid var(--glass-border);
+    backdrop-filter: blur(12px); border-radius: 50px;
+    padding: 7px 16px; font-size: 13px; color: var(--text);
+    cursor: pointer; transition: all 0.3s; font-family: 'DM Sans', sans-serif;
+  }
+  .nav-btn:hover { background: var(--rose); color: white; transform: translateY(-1px); }
+
+  /* ── SECTION WRAPPER ── */
+  .section {
+    display: none; min-height: 100vh; position: relative; z-index: 1;
+    padding: 40px 20px; flex-direction: column; align-items: center; justify-content: center;
+  }
+  .section.active { display: flex; animation: fadeUp 0.7s cubic-bezier(.4,0,.2,1) both; }
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(32px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  /* ── GLASS CARD ── */
+  .card {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    backdrop-filter: blur(20px);
+    border-radius: 24px;
+    padding: 40px 36px;
+    box-shadow: 0 8px 40px var(--shadow), 0 1px 0 var(--glass-border) inset;
+    width: 100%; max-width: 540px;
+    transition: transform 0.3s, box-shadow 0.3s;
+  }
+  .card:hover { transform: translateY(-3px); box-shadow: 0 16px 60px var(--shadow-deep); }
+
+  /* ── TYPOGRAPHY ── */
+  .section-label {
+    font-family: 'Dancing Script', cursive;
+    font-size: 15px; color: var(--rose-deep); letter-spacing: 1px;
+    margin-bottom: 6px; text-align: center;
+  }
+  h1, h2 {
+    font-family: 'Playfair Display', serif;
+    color: var(--text); line-height: 1.2;
+  }
+  h1 { font-size: clamp(2.2rem, 6vw, 3.5rem); }
+  h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); margin-bottom: 8px; }
+  p { color: var(--text-soft); line-height: 1.7; font-size: 15px; }
+
+  /* ── COMPLIMENT ── */
+  .compliment {
+    font-family: 'Dancing Script', cursive;
+    font-size: 18px; color: var(--rose-deep);
+    text-align: center; margin: 18px 0 6px;
+    opacity: 0.85;
+  }
+
+  /* ── BUTTONS ── */
+  .btn {
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    padding: 14px 36px; border-radius: 50px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 15px; font-weight: 500;
+    transition: all 0.35s cubic-bezier(.4,0,.2,1);
+    text-decoration: none; position: relative; overflow: hidden;
+  }
+  .btn-primary {
+    background: linear-gradient(135deg, var(--rose), var(--rose-deep));
+    color: white; box-shadow: 0 6px 24px rgba(232,121,160,0.4);
+  }
+  .btn-primary:hover { transform: translateY(-3px) scale(1.04); box-shadow: 0 12px 36px rgba(232,121,160,0.55); }
+  .btn-secondary {
+    background: var(--glass); border: 1.5px solid var(--rose);
+    color: var(--rose-deep); backdrop-filter: blur(8px);
+  }
+  .btn-secondary:hover { background: var(--rose); color: white; }
+  .btn-group { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; margin-top: 28px; }
+
+  /* ── INPUT ── */
+  .field { margin-bottom: 20px; }
+  label { display: block; font-size: 13px; font-weight: 500; color: var(--text-soft); margin-bottom: 7px; letter-spacing: 0.3px; }
+  input[type=text], input[type=date], textarea, select {
+    width: 100%; padding: 13px 18px; border-radius: 14px;
+    border: 1.5px solid var(--glass-border); background: var(--glass);
+    backdrop-filter: blur(8px); color: var(--text);
+    font-family: 'DM Sans', sans-serif; font-size: 15px;
+    transition: border-color 0.3s, box-shadow 0.3s; outline: none;
+    box-shadow: 0 2px 8px var(--shadow);
+  }
+  input:focus, textarea:focus, select:focus {
+    border-color: var(--rose); box-shadow: 0 0 0 3px rgba(244,167,185,0.22);
+  }
+  textarea { resize: vertical; min-height: 90px; }
+  select option { background: var(--cream); color: var(--text); }
+
+  /* ── EMOJI PICKER ── */
+  .emoji-grid { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px; }
+  .emoji-btn {
+    font-size: 24px; padding: 8px 10px; border-radius: 12px; cursor: pointer;
+    background: var(--glass); border: 1.5px solid transparent;
+    transition: all 0.25s; line-height: 1;
+  }
+  .emoji-btn:hover, .emoji-btn.selected { border-color: var(--rose); background: var(--blush); transform: scale(1.2); }
+
+  /* ── QUIZ CARDS ── */
+  .quiz-options { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-top: 16px; }
+  .option-card {
+    padding: 16px 12px; border-radius: 16px; border: 1.5px solid var(--glass-border);
+    background: var(--gradient-card); cursor: pointer; text-align: center;
+    transition: all 0.3s; font-size: 14px; font-weight: 500; color: var(--text);
+    backdrop-filter: blur(8px);
+  }
+  .option-card:hover { border-color: var(--rose); transform: scale(1.03); background: rgba(244,167,185,0.15); }
+  .option-card.selected { border-color: var(--rose-deep); background: linear-gradient(135deg, rgba(244,167,185,0.3), rgba(201,184,240,0.2)); color: var(--rose-deep); }
+  .option-card .opt-emoji { font-size: 28px; display: block; margin-bottom: 6px; }
+
+  /* ── PROGRESS ── */
+  .quiz-progress-wrap { margin-bottom: 20px; }
+  .quiz-progress-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-soft); margin-bottom: 6px; }
+  .quiz-bar { height: 6px; background: rgba(200,150,180,0.2); border-radius: 99px; overflow: hidden; }
+  .quiz-bar-fill { height: 100%; background: linear-gradient(90deg, var(--rose), var(--lavender-deep)); border-radius: 99px; transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+
+  /* ── THIS OR THAT ── */
+  .tot-grid { display: grid; gap: 14px; margin-top: 16px; }
+  .tot-row { display: flex; align-items: center; gap: 12px; }
+  .tot-option {
+    flex: 1; padding: 14px 10px; border-radius: 16px; border: 1.5px solid var(--glass-border);
+    background: var(--gradient-card); cursor: pointer; text-align: center;
+    font-size: 14px; font-weight: 500; transition: all 0.3s; backdrop-filter: blur(8px);
+  }
+  .tot-option:hover { border-color: var(--rose); }
+  .tot-option.selected { border-color: var(--rose-deep); background: linear-gradient(135deg,rgba(244,167,185,0.3),rgba(201,184,240,0.2)); color: var(--rose-deep); font-weight: 600; }
+  .tot-vs { color: var(--text-soft); font-size: 12px; font-weight: 600; white-space: nowrap; }
+
+  /* ── MEMORY WALL ── */
+  .photo-upload-area {
+    border: 2px dashed var(--rose); border-radius: 20px; padding: 32px;
+    text-align: center; cursor: pointer; transition: all 0.3s;
+    background: rgba(244,167,185,0.07); margin-bottom: 16px;
+  }
+  .photo-upload-area:hover { background: rgba(244,167,185,0.15); }
+  .photo-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px,1fr)); gap: 12px; margin-top: 12px; }
+  .photo-item { position: relative; border-radius: 16px; overflow: hidden; aspect-ratio: 1; }
+  .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+  .photo-caption { font-size: 11px; color: var(--text-soft); text-align: center; margin-top: 4px; padding: 0 4px; }
+  .photo-item .remove-btn {
+    position: absolute; top: 6px; right: 6px; background: rgba(0,0,0,0.5);
+    color: white; border: none; border-radius: 50%; width: 22px; height: 22px;
+    font-size: 13px; cursor: pointer; display: flex; align-items: center; justify-content: center;
+  }
+
+  /* ── SECRET MESSAGE ── */
+  .secret-box {
+    position: relative;
+    background: linear-gradient(135deg, rgba(244,167,185,0.15), rgba(201,184,240,0.15));
+    border: 1.5px solid rgba(244,167,185,0.4); border-radius: 20px; padding: 24px;
+    margin-top: 16px;
+  }
+  .secret-box::before {
+    content: '🔒'; position: absolute; top: -16px; left: 50%; transform: translateX(-50%);
+    font-size: 28px; background: var(--cream); padding: 0 8px; border-radius: 50%;
+  }
+
+  /* ── FINAL SUMMARY ── */
+  #summary-card {
+    background: var(--glass); backdrop-filter: blur(24px);
+    border: 1px solid var(--glass-border); border-radius: 28px;
+    padding: 36px; max-width: 600px; width: 100%;
+    box-shadow: 0 12px 60px var(--shadow);
+  }
+  .summary-header { text-align: center; margin-bottom: 28px; }
+  .summary-avatar {
+    width: 80px; height: 80px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--rose), var(--lavender));
+    display: flex; align-items: center; justify-content: center;
+    font-size: 36px; margin: 0 auto 14px; box-shadow: 0 6px 24px var(--shadow);
+  }
+  .summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 20px; }
+  .summary-item {
+    background: var(--gradient-card); border: 1px solid var(--glass-border);
+    border-radius: 16px; padding: 14px 16px; backdrop-filter: blur(8px);
+  }
+  .summary-item .s-label { font-size: 11px; color: var(--text-soft); text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 4px; }
+  .summary-item .s-value { font-size: 15px; font-weight: 500; color: var(--text); word-break: break-word; }
+  .summary-full { grid-column: 1 / -1; }
+
+  /* ── CONFETTI ── */
+  .confetti-piece {
+    position: fixed; top: -10px; z-index: 9999; pointer-events: none;
+    animation: confettiFall linear forwards;
+  }
+  @keyframes confettiFall {
+    to { transform: translateY(110vh) rotate(720deg); opacity: 0; }
+  }
+
+  /* ── STORY CARDS ── */
+  .story-card {
+    background: linear-gradient(135deg, var(--rose), var(--lavender-deep));
+    border-radius: 20px; padding: 24px; text-align: center; color: white;
+    font-family: 'Playfair Display', serif; font-size: 18px; margin: 8px 0;
+    box-shadow: 0 8px 32px var(--shadow-deep); animation: popIn 0.4s cubic-bezier(.4,0,.2,1);
+  }
+  @keyframes popIn { from { transform: scale(0.85); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+  /* ── TYPEWRITER ── */
+  #typewriter::after { content: '|'; animation: blink 0.8s infinite; color: var(--rose); }
+  @keyframes blink { 50% { opacity: 0; } }
+
+  /* ── HEART PULSE ── */
+  .heart-big {
+    font-size: 72px; display: block; text-align: center; margin: 8px 0;
+    animation: heartbeat 1.4s ease-in-out infinite;
+  }
+  @keyframes heartbeat {
+    0%,100% { transform: scale(1); }
+    14% { transform: scale(1.15); }
+    28% { transform: scale(1); }
+    42% { transform: scale(1.08); }
+    70% { transform: scale(1); }
+  }
+
+  /* ── WELCOME ── */
+  #welcome { text-align: center; }
+  #welcome h1 { margin-bottom: 12px; }
+  #welcome .tagline { font-family: 'Dancing Script', cursive; font-size: 22px; color: var(--rose-deep); margin-bottom: 32px; }
+
+  /* ── DARK TOGGLE ── */
+  #dark-toggle { font-size: 18px; padding: 7px 13px; }
+
+  /* ── SECTION DOTS ── */
+  #section-dots {
+    position: fixed; right: 14px; top: 50%; transform: translateY(-50%);
+    display: flex; flex-direction: column; gap: 8px; z-index: 998;
+  }
+  .dot {
+    width: 8px; height: 8px; border-radius: 50%; background: rgba(200,130,170,0.3);
+    cursor: pointer; transition: all 0.3s;
+  }
+  .dot.active { background: var(--rose-deep); transform: scale(1.4); }
+
+  /* ── SCROLLABLE INNER ── */
+  .scroll-inner { overflow-y: auto; max-height: 80vh; padding-right: 4px; }
+  .scroll-inner::-webkit-scrollbar { width: 4px; }
+  .scroll-inner::-webkit-scrollbar-thumb { background: var(--rose); border-radius: 99px; }
+
+  /* ── DREAMS TEXTAREA ── */
+  .dream-field { position: relative; }
+  .dream-field .dream-icon { position: absolute; top: 13px; left: 14px; font-size: 16px; pointer-events: none; }
+  .dream-field input { padding-left: 42px; }
+
+  /* ── FINAL PAGE ── */
+  #final-section { text-align: center; }
+
+  /* ── SHARE BUTTONS ── */
+  .share-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    padding: 12px 22px; border-radius: 50px; border: none; cursor: pointer;
+    font-family: 'DM Sans', sans-serif; font-size: 14px; font-weight: 500;
+    transition: all 0.3s;
+  }
+  .wa-btn { background: #25d366; color: white; }
+  .wa-btn:hover { background: #1da855; transform: translateY(-2px); }
+  .dl-btn { background: var(--lavender-deep); color: white; }
+  .dl-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(167,139,218,0.4); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 500px) {
+    .card { padding: 28px 20px; }
+    .quiz-options { grid-template-columns: 1fr; }
+    .summary-grid { grid-template-columns: 1fr; }
+    h1 { font-size: 2rem; }
+    #section-dots { display: none; }
+  }
+
+  /* ── STEP COUNTER ── */
+  .step-badge {
+    display: inline-flex; align-items: center; gap: 6px;
+    background: rgba(244,167,185,0.2); border: 1px solid rgba(244,167,185,0.4);
+    border-radius: 99px; padding: 4px 14px; font-size: 12px; color: var(--rose-deep);
+    margin-bottom: 14px;
+  }
+
+  /* ── LOADING DOTS ── */
+  .loading-dots span {
+    display: inline-block; animation: loadBounce 1.2s infinite;
+    font-size: 28px;
+  }
+  .loading-dots span:nth-child(2) { animation-delay: 0.2s; }
+  .loading-dots span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes loadBounce { 0%,80%,100%{transform:scale(0.6);opacity:0.4} 40%{transform:scale(1);opacity:1} }
+
+  /* ── TRANSITION OVERLAY ── */
+  #page-transition {
+    position: fixed; inset: 0; z-index: 9998;
+    background: linear-gradient(135deg, var(--rose), var(--lavender));
+    pointer-events: none; opacity: 0; transition: opacity 0.3s;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 48px;
+  }
+  #page-transition.show { opacity: 1; pointer-events: all; }
+
+  /* ── PHOTO ERROR ── */
+  .field-error { font-size: 12px; color: #e05; margin-top: 5px; }
+
+  /* ── COMPLETION ── */
+  .completion-ring {
+    width: 90px; height: 90px; margin: 0 auto 20px;
+    border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    font-size: 40px; position: relative;
+    background: conic-gradient(var(--rose-deep) 100%, rgba(200,150,180,0.2) 0%);
+    animation: ringPop 0.8s cubic-bezier(.4,0,.2,1);
+  }
+  .completion-ring::before {
+    content: ''; position: absolute; inset: 6px; border-radius: 50%; background: var(--cream);
+  }
+  .completion-ring span { position: relative; z-index: 1; }
+  @keyframes ringPop { from{transform:scale(0) rotate(-180deg);} to{transform:scale(1) rotate(0deg);} }
+
+  /* PHOTO caption input */
+  .photo-caption-input { margin-top: 6px; width: 100%; font-size: 12px; padding: 6px 10px; border-radius: 8px; border: 1px solid var(--glass-border); background: var(--glass); color: var(--text); font-family: 'DM Sans',sans-serif; }
+</style>
+</head>
+<body>
+
+<canvas id="bg-canvas"></canvas>
+<div id="progress-bar"></div>
+<div id="page-transition">🌸</div>
+
+<nav id="top-nav">
+  <button class="nav-btn" id="dark-toggle">🌙</button>
+  <button class="nav-btn" onclick="showSection('welcome')" style="font-family:'Dancing Script',cursive;font-size:15px;">cattie ❤️</button>
+</nav>
+
+<div id="section-dots"></div>
+
+<!-- ════════════════════ SECTIONS ════════════════════ -->
+
+<!-- 0. WELCOME -->
+<section class="section active" id="welcome" data-index="0">
+  <div style="text-align:center;max-width:580px;width:100%">
+    <span class="heart-big">💗</span>
+    <div class="section-label">a little something made with love</div>
+    <h1 id="typewriter"></h1>
+    <p class="tagline" style="margin-top:8px;">I made this just for you ✨</p>
+    <div class="card" style="margin:0 auto 28px;">
+      <p style="text-align:center;font-size:16px;line-height:1.8;">
+        Hey Cattie 🌸 — I created this little magical space because I want to know everything about you. Not in a weird way... just in a <em>totally smitten</em> kind of way. 😊 
+        <br/><br/>Take your time, be honest, have fun — and know that every answer makes me smile.
+      </p>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-primary" onclick="goNext()">Let's Begin 🌸</button>
+    </div>
+  </div>
+</section>
+
+<!-- 1. ABOUT YOU -->
+<section class="section" id="about-you" data-index="1">
+  <div class="card">
+    <div class="step-badge">✨ Section 1 of 8</div>
+    <div class="section-label">let's start with the basics</div>
+    <h2>Tell me about you 🌷</h2>
+    <p style="margin-bottom:24px;">No pressure, no rush — just you being you.</p>
+    <div class="scroll-inner">
+      <div class="field">
+        <label>Your full name 🌸</label>
+        <input type="text" id="q-name" placeholder="Cattie..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Your nickname / what friends call you 💫</label>
+        <input type="text" id="q-nickname" placeholder="What do people call you?" autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Your birthday 🎂</label>
+        <input type="date" id="q-birthday"/>
+      </div>
+      <div class="field">
+        <label>Your hometown / city 🏙️</label>
+        <input type="text" id="q-city" placeholder="Where are you from?" autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Your favorite emoji (pick one! 👇)</label>
+        <div class="emoji-grid" id="emoji-grid">
+          <button class="emoji-btn" onclick="pickEmoji(this,'❤️')">❤️</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🌸')">🌸</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'✨')">✨</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🌙')">🌙</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🦋')">🦋</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🌺')">🌺</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'💜')">💜</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🎵')">🎵</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🌊')">🌊</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🍀')">🍀</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'💫')">💫</button>
+          <button class="emoji-btn" onclick="pickEmoji(this,'🌻')">🌻</button>
+        </div>
+        <input type="hidden" id="q-emoji" value=""/>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" onclick="saveAbout()">Continue 💕</button>
+    </div>
+  </div>
+</section>
+
+<!-- 2. FAVORITES -->
+<section class="section" id="favorites" data-index="2">
+  <div class="card">
+    <div class="step-badge">🌟 Section 2 of 8</div>
+    <div class="section-label">the things that make you, you</div>
+    <h2>Your Favorites 💕</h2>
+    <div class="compliment" id="favorites-compliment">Already loving your vibe! ✨</div>
+    <div class="scroll-inner">
+      <div class="field">
+        <label>Favorite food 🍽️</label>
+        <input type="text" id="q-food" placeholder="Could eat this every day..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Favorite color 🎨</label>
+        <input type="text" id="q-color" placeholder="The one that feels like you..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Favorite movie / show 🎬</label>
+        <input type="text" id="q-movie" placeholder="The one you'd watch a hundred times..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Favorite song / artist 🎵</label>
+        <input type="text" id="q-song" placeholder="Current obsession..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Favorite celebrity / person you look up to 🌟</label>
+        <input type="text" id="q-celeb" placeholder="Celeb crush or icon..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Favorite place you've been 🗺️</label>
+        <input type="text" id="q-place" placeholder="A place that stole your heart..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Favorite season 🌿</label>
+        <select id="q-season">
+          <option value="">— pick one —</option>
+          <option>🌸 Spring — new beginnings</option>
+          <option>☀️ Summer — warm and golden</option>
+          <option>🍂 Autumn — cozy and golden</option>
+          <option>❄️ Winter — magical and quiet</option>
+        </select>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" onclick="saveFavorites()">Next ✨</button>
+    </div>
+  </div>
+</section>
+
+<!-- 3. PERSONALITY QUIZ -->
+<section class="section" id="personality" data-index="3">
+  <div class="card" style="max-width:560px">
+    <div class="step-badge">🧠 Section 3 of 8</div>
+    <div class="section-label">let's figure you out</div>
+    <h2>Personality Quiz 🌙</h2>
+    <p style="margin-bottom:20px;">Pick the one that feels most like you — no wrong answers!</p>
+    <div class="quiz-progress-wrap">
+      <div class="quiz-progress-label">
+        <span id="q-label">Question 1 of 6</span>
+        <span id="q-pct">0%</span>
+      </div>
+      <div class="quiz-bar"><div class="quiz-bar-fill" id="q-bar" style="width:0%"></div></div>
+    </div>
+    <div id="quiz-container"></div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" id="quiz-next-btn" onclick="quizNext()">Next Question →</button>
+    </div>
+  </div>
+</section>
+
+<!-- 4. DREAMS & GOALS -->
+<section class="section" id="dreams" data-index="4">
+  <div class="card">
+    <div class="step-badge">🌠 Section 4 of 8</div>
+    <div class="section-label">the future is yours</div>
+    <h2>Dreams & Goals 🚀</h2>
+    <div class="compliment">You have such a beautiful mind 🌙</div>
+    <div class="scroll-inner">
+      <div class="field dream-field">
+        <label>Your dream career / what you'd love to do 💼</label>
+        <div style="position:relative">
+          <span style="position:absolute;top:13px;left:14px;pointer-events:none">💼</span>
+          <input type="text" id="q-career" placeholder="Dream big..." style="padding-left:40px" autocomplete="off"/>
+        </div>
+      </div>
+      <div class="field">
+        <label>Places you want to visit someday 🌍</label>
+        <input type="text" id="q-travel" placeholder="Your travel bucket list..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Your biggest goal in life 🎯</label>
+        <textarea id="q-goal" placeholder="What does success look like to you?"></textarea>
+      </div>
+      <div class="field">
+        <label>One thing you want to achieve this year 📅</label>
+        <input type="text" id="q-thisyear" placeholder="This year's mission..." autocomplete="off"/>
+      </div>
+      <div class="field">
+        <label>Something you want to learn or get better at 📚</label>
+        <input type="text" id="q-learn" placeholder="Skill, hobby, anything..." autocomplete="off"/>
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" onclick="saveDreams()">Keep Going 💫</button>
+    </div>
+  </div>
+</section>
+
+<!-- 5. THIS OR THAT -->
+<section class="section" id="thisorthat" data-index="5">
+  <div class="card" style="max-width:560px">
+    <div class="step-badge">⚡ Section 5 of 8</div>
+    <div class="section-label">quick choices, big personality</div>
+    <h2>This or That? 🤔</h2>
+    <div class="compliment">No overthinking — first instinct wins! 😄</div>
+    <div class="scroll-inner">
+      <div class="tot-grid" id="tot-grid">
+        <!-- JS fills this -->
+      </div>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" onclick="saveToT()">Continue 🌸</button>
+    </div>
+  </div>
+</section>
+
+<!-- 6. SECRET MESSAGE -->
+<section class="section" id="secret" data-index="6">
+  <div class="card">
+    <div class="step-badge">🔒 Section 6 of 8</div>
+    <div class="section-label">just between us</div>
+    <h2>Leave a Secret Message 💌</h2>
+    <p>This is your space. Say anything — a thought, a feeling, a secret wish. Only I'll ever read this. 🤫</p>
+    <div class="secret-box" style="margin-top:28px;">
+      <textarea id="q-secret" placeholder="Dear Cattie... (or write anything your heart wants to say 🌸)" style="background:transparent;border:none;box-shadow:none;font-size:16px;line-height:1.8;padding:4px;" rows="6"></textarea>
+    </div>
+    <div class="field" style="margin-top:20px;">
+      <label>One word that describes how you feel right now 💭</label>
+      <input type="text" id="q-feeling" placeholder="e.g. happy, nervous, curious..." autocomplete="off"/>
+    </div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" onclick="saveSecret()">Almost there! 🌟</button>
+    </div>
+  </div>
+</section>
+
+<!-- 7. MEMORY WALL -->
+<section class="section" id="memories" data-index="7">
+  <div class="card" style="max-width:600px">
+    <div class="step-badge">📸 Section 7 of 8</div>
+    <div class="section-label">your beautiful moments</div>
+    <h2>Memory Wall 🖼️</h2>
+    <p style="margin-bottom:16px;">Upload your favorite photos. They'll be part of your story here. 🌸</p>
+    <div class="photo-upload-area" onclick="document.getElementById('photo-input').click()">
+      <div style="font-size:40px;margin-bottom:8px">📷</div>
+      <div style="font-weight:500;color:var(--text)">Tap to add photos</div>
+      <div style="font-size:12px;color:var(--text-soft);margin-top:4px">JPG, PNG, GIF — up to 10 photos</div>
+    </div>
+    <input type="file" id="photo-input" accept="image/*" multiple style="display:none" onchange="handlePhotos(this)"/>
+    <div class="photo-grid" id="photo-grid"></div>
+    <div class="btn-group">
+      <button class="btn btn-secondary" onclick="goPrev()">← Back</button>
+      <button class="btn btn-primary" onclick="saveMemories()">Final Step ✨</button>
+    </div>
+  </div>
+</section>
+
+<!-- 8. FINAL PAGE -->
+<section class="section" id="final-section" data-index="8">
+  <div style="max-width:620px;width:100%">
+    <div class="completion-ring"><span>🌸</span></div>
+    <div class="section-label">you made it!</div>
+    <h1 style="margin-bottom:8px">You made my day ❤️</h1>
+    <p class="tagline" style="font-family:'Dancing Script',cursive;font-size:22px;color:var(--rose-deep);margin-bottom:24px;display:block;">Thank you for being you, Cattie.</p>
+
+    <div id="summary-card">
+      <div class="summary-header">
+        <div class="summary-avatar" id="summary-emoji">💗</div>
+        <h2 id="summary-name" style="margin-bottom:4px">Cattie</h2>
+        <p id="summary-tagline" style="font-family:'Dancing Script',cursive;font-size:16px;color:var(--rose-deep)">the most wonderful person 🌸</p>
+      </div>
+      <div class="summary-grid" id="summary-grid">
+        <!-- filled by JS -->
+      </div>
+    </div>
+
+    <blockquote style="font-family:'Playfair Display',serif;font-size:18px;color:var(--text-soft);font-style:italic;text-align:center;margin:24px 0;line-height:1.7;">
+      "In a sea of people, my eyes would always find you."
+    </blockquote>
+
+    <div class="btn-group" style="justify-content:center;flex-wrap:wrap;">
+      <button class="share-btn wa-btn" onclick="shareWhatsApp()">💬 Share on WhatsApp</button>
+      <button class="share-btn dl-btn" onclick="downloadSummary()">📄 Download Summary</button>
+      <button class="btn btn-secondary" onclick="showSection('welcome');resetAll()" style="margin-top:0">Start Over 🔄</button>
+    </div>
+  </div>
+</section>
+
+<!-- ════════════ SCRIPTS ════════════ -->
+<script>
+
+// ── DATA STORE ──
+let data = {};
+try { data = JSON.parse(localStorage.getItem('cattie-data') || '{}'); } catch(e){ data = {}; }
+const save = () => { try { localStorage.setItem('cattie-data', JSON.stringify(data)); } catch(e){} };
+
+// ── SECTIONS ORDER ──
+const sections = ['welcome','about-you','favorites','personality','dreams','thisorthat','secret','memories','final-section'];
+let current = 0;
+
+// ── SECTION DOTS ──
+const dotsEl = document.getElementById('section-dots');
+sections.forEach((id, i) => {
+  const d = document.createElement('div');
+  d.className = 'dot' + (i === 0 ? ' active' : '');
+  d.title = id.replace(/-/g,' ');
+  d.onclick = () => { if(i < current + 1) showSection(id); };
+  dotsEl.appendChild(d);
+});
+
+function updateDots() {
+  document.querySelectorAll('.dot').forEach((d,i) => {
+    d.classList.toggle('active', i === current);
+  });
+}
+
+// ── PROGRESS BAR ──
+function updateProgress() {
+  const pct = Math.round((current / (sections.length - 1)) * 100);
+  document.getElementById('progress-bar').style.width = pct + '%';
+}
+
+// ── TRANSITION ──
+function transition(fn) {
+  const t = document.getElementById('page-transition');
+  t.classList.add('show');
+  setTimeout(() => { fn(); t.classList.remove('show'); }, 320);
+}
+
+// ── SHOW SECTION ──
+function showSection(id) {
+  const idx = sections.indexOf(id);
+  if(idx === -1) return;
+  transition(() => {
+    document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+    document.getElementById(id).classList.add('active');
+    current = idx;
+    updateDots();
+    updateProgress();
+    window.scrollTo(0,0);
+  });
+}
+
+function goNext() { if(current < sections.length - 1) showSection(sections[current + 1]); }
+function goPrev() { if(current > 0) showSection(sections[current - 1]); }
+
+// ── TYPEWRITER ──
+const greetings = ['Hey Cattie! 🌸', 'Hi gorgeous! ✨', 'Hello sunshine! 🌻'];
+let tw = greetings[Math.floor(Math.random() * greetings.length)];
+let twI = 0, twEl = document.getElementById('typewriter');
+function typeWrite() {
+  if(twI < tw.length) { twEl.textContent = tw.slice(0, ++twI); setTimeout(typeWrite, 80); }
+}
+setTimeout(typeWrite, 400);
+
+// ── EMOJI PICKER ──
+let selectedEmoji = data.emoji || '';
+function pickEmoji(btn, e) {
+  document.querySelectorAll('.emoji-btn').forEach(b => b.classList.remove('selected'));
+  btn.classList.add('selected');
+  selectedEmoji = e;
+  document.getElementById('q-emoji').value = e;
+}
+// restore
+if(data.emoji) {
+  document.querySelectorAll('.emoji-btn').forEach(b => {
+    if(b.textContent === data.emoji) b.classList.add('selected');
+  });
+}
+
+// ── ABOUT YOU ──
+function restoreAbout() {
+  ['name','nickname','birthday','city'].forEach(k => {
+    const el = document.getElementById('q-' + k);
+    if(el && data[k]) el.value = data[k];
+  });
+}
+restoreAbout();
+
+function saveAbout() {
+  const name = document.getElementById('q-name').value.trim();
+  if(!name) { alert('Please enter your name 🌸'); return; }
+  data.name = name;
+  data.nickname = document.getElementById('q-nickname').value.trim();
+  data.birthday = document.getElementById('q-birthday').value;
+  data.city = document.getElementById('q-city').value.trim();
+  data.emoji = selectedEmoji;
+  save();
+  // compliment
+  const compliments = ['You have such a beautiful name! 💕','Already loving everything about you! ✨','Off to an amazing start! 🌸'];
+  document.getElementById('favorites-compliment').textContent = compliments[Math.floor(Math.random()*compliments.length)];
+  goNext();
+}
+
+// ── FAVORITES ──
+function restoreFavorites() {
+  ['food','color','movie','song','celeb','place','season'].forEach(k => {
+    const el = document.getElementById('q-' + k);
+    if(el && data[k]) el.value = data[k];
+  });
+}
+restoreFavorites();
+
+function saveFavorites() {
+  ['food','color','movie','song','celeb','place','season'].forEach(k => {
+    const el = document.getElementById('q-' + k);
+    if(el) data[k] = el.value.trim();
+  });
+  save(); goNext();
+}
+
+// ── QUIZ ──
+const quizQuestions = [
+  { q: 'When you walk into a room, you usually...', opts: [
+    { e:'🤝', t:'Say hi to everyone' },
+    { e:'👀', t:'Observe first, then talk' },
+    { e:'🎉', t:'Start the energy up' },
+    { e:'🧘', t:'Find your corner & relax' }
+  ]},
+  { q: 'Your perfect Sunday looks like...', opts: [
+    { e:'🛋️', t:'Netflix & chill at home' },
+    { e:'🌿', t:'A walk in nature' },
+    { e:'☕', t:'Café with good vibes' },
+    { e:'🛍️', t:'Shopping with friends' }
+  ]},
+  { q: 'When stressed, you tend to...', opts: [
+    { e:'🍫', t:'Eat comfort food' },
+    { e:'🎵', t:'Blast music & zone out' },
+    { e:'💬', t:'Talk it out with a friend' },
+    { e:'🛁', t:'Take a long shower/bath' }
+  ]},
+  { q: 'Your love language is closest to...', opts: [
+    { e:'🤗', t:'Physical touch' },
+    { e:'🎁', t:'Gift giving' },
+    { e:'⏰', t:'Quality time' },
+    { e:'💬', t:'Words of affirmation' }
+  ]},
+  { q: 'You\'d describe yourself as more...', opts: [
+    { e:'🧠', t:'Logical thinker' },
+    { e:'💖', t:'Emotional & empathetic' },
+    { e:'⚡', t:'Spontaneous & wild' },
+    { e:'📋', t:'Planned & organized' }
+  ]},
+  { q: 'In friendships you are usually the...', opts: [
+    { e:'👑', t:'The social butterfly' },
+    { e:'🧸', t:'The caring one' },
+    { e:'😂', t:'The funny one' },
+    { e:'🧭', t:'The advice-giver' }
+  ]},
+];
+let qCurrent = 0;
+let qAnswers = data.quizAnswers || [];
+
+function renderQuestion() {
+  const q = quizQuestions[qCurrent];
+  const pct = Math.round((qCurrent / quizQuestions.length) * 100);
+  document.getElementById('q-label').textContent = `Question ${qCurrent + 1} of ${quizQuestions.length}`;
+  document.getElementById('q-pct').textContent = pct + '%';
+  document.getElementById('q-bar').style.width = pct + '%';
+  document.getElementById('quiz-next-btn').textContent = qCurrent === quizQuestions.length - 1 ? 'Finish Quiz ✨' : 'Next Question →';
+
+  const html = `
+    <div style="font-weight:600;font-size:16px;margin-bottom:16px;line-height:1.5">${q.q}</div>
+    <div class="quiz-options">
+      ${q.opts.map((o,i) => `
+        <div class="option-card ${qAnswers[qCurrent] === i ? 'selected' : ''}" onclick="selectOption(this, ${i})">
+          <span class="opt-emoji">${o.e}</span>${o.t}
+        </div>
+      `).join('')}
+    </div>
+  `;
+  document.getElementById('quiz-container').innerHTML = html;
+}
+
+function selectOption(el, idx) {
+  document.querySelectorAll('.option-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  qAnswers[qCurrent] = idx;
+}
+
+function quizNext() {
+  if(qAnswers[qCurrent] === undefined) { alert('Pick an option first 🌸'); return; }
+  if(qCurrent < quizQuestions.length - 1) {
+    qCurrent++;
+    renderQuestion();
+  } else {
+    data.quizAnswers = qAnswers;
+    // derive personality
+    const counts = [0,0,0,0];
+    qAnswers.forEach(a => { if(a !== undefined) counts[a]++; });
+    const max = Math.max(...counts);
+    const types = ['🦋 Social Butterfly','💖 Warm & Empathetic','⚡ Free Spirit','🌿 Thoughtful Soul'];
+    data.personality = types[counts.indexOf(max)];
+    save();
+    goNext();
+  }
+}
+
+renderQuestion();
+
+// ── DREAMS ──
+function restoreDreams() {
+  ['career','travel','goal','thisyear','learn'].forEach(k => {
+    const el = document.getElementById('q-' + k);
+    if(el && data[k]) el.value = data[k];
+  });
+}
+restoreDreams();
+
+function saveDreams() {
+  ['career','travel','goal','thisyear','learn'].forEach(k => {
+    const el = document.getElementById('q-' + k);
+    if(el) data[k] = el.value.trim();
+  });
+  save(); goNext();
+}
+
+// ── THIS OR THAT ──
+const totPairs = [
+  ['☕ Coffee','🍵 Tea'],
+  ['🏖️ Beach','⛰️ Mountains'],
+  ['🌅 Morning','🌙 Night owl'],
+  ['📚 Books','🎬 Movies'],
+  ['❤️ Love','💰 Money'],
+  ['🐱 Cats','🐶 Dogs'],
+  ['🍕 Pizza','🍔 Burger'],
+  ['📱 Texts','📞 Calls'],
+];
+let totAnswers = data.totAnswers || {};
+
+function renderToT() {
+  document.getElementById('tot-grid').innerHTML = totPairs.map((pair, i) => `
+    <div class="tot-row">
+      <div class="tot-option ${totAnswers[i] === 0 ? 'selected' : ''}" onclick="pickToT(${i}, 0, this)">${pair[0]}</div>
+      <div class="tot-vs">vs</div>
+      <div class="tot-option ${totAnswers[i] === 1 ? 'selected' : ''}" onclick="pickToT(${i}, 1, this)">${pair[1]}</div>
+    </div>
+  `).join('');
+}
+
+function pickToT(i, choice, el) {
+  totAnswers[i] = choice;
+  const row = el.closest('.tot-row');
+  row.querySelectorAll('.tot-option').forEach(o => o.classList.remove('selected'));
+  el.classList.add('selected');
+}
+
+function saveToT() {
+  data.totAnswers = totAnswers;
+  data.totPairs = totPairs;
+  save(); goNext();
+}
+renderToT();
+
+// ── SECRET ──
+if(data.secret) document.getElementById('q-secret').value = data.secret;
+if(data.feeling) document.getElementById('q-feeling').value = data.feeling;
+
+function saveSecret() {
+  data.secret = document.getElementById('q-secret').value.trim();
+  data.feeling = document.getElementById('q-feeling').value.trim();
+  save(); goNext();
+}
+
+// ── MEMORIES ──
+let photos = data.photos || []; // array of {src, caption}
+
+function handlePhotos(input) {
+  const files = Array.from(input.files);
+  const remaining = 10 - photos.length;
+  files.slice(0, remaining).forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      photos.push({ src: e.target.result, caption: '' });
+      renderPhotos();
+    };
+    reader.readAsDataURL(file);
+  });
+  input.value = '';
+}
+
+function renderPhotos() {
+  const grid = document.getElementById('photo-grid');
+  grid.innerHTML = photos.map((p, i) => `
+    <div>
+      <div class="photo-item">
+        <img src="${p.src}" alt="memory"/>
+        <button class="remove-btn" onclick="removePhoto(${i})">×</button>
+      </div>
+      <input class="photo-caption-input" placeholder="Add a caption..." value="${p.caption}" onchange="photos[${i}].caption=this.value" />
+    </div>
+  `).join('');
+}
+
+function removePhoto(i) {
+  photos.splice(i, 1);
+  renderPhotos();
+}
+
+function saveMemories() {
+  data.photos = photos.map(p => ({ src: p.src.substring(0,200)+'...TRUNCATED', caption: p.caption })); 
+  // store captions only (not full base64 in localStorage to avoid quota)
+  data.photoCaptions = photos.map(p => p.caption);
+  data.photoCount = photos.length;
+  save();
+  buildFinal();
+  goNext();
+  fireworks();
+}
+renderPhotos();
+
+// ── FINAL / SUMMARY ──
+function buildFinal() {
+  const name = data.name || 'Cattie';
+  const emoji = data.emoji || '💗';
+
+  document.getElementById('summary-emoji').textContent = emoji;
+  document.getElementById('summary-name').textContent = name;
+  document.getElementById('summary-tagline').textContent = `the most wonderful ${data.personality || 'person'} 🌸`;
+
+  const items = [
+    { label: '🎂 Birthday', value: data.birthday ? formatDate(data.birthday) : '—' },
+    { label: '🏙️ From', value: data.city || '—' },
+    { label: '🍽️ Fave Food', value: data.food || '—' },
+    { label: '🎨 Fave Color', value: data.color || '—' },
+    { label: '🎬 Fave Movie', value: data.movie || '—' },
+    { label: '🎵 Fave Song', value: data.song || '—' },
+    { label: '🌟 Icon', value: data.celeb || '—' },
+    { label: '🗺️ Fave Place', value: data.place || '—' },
+    { label: '🌿 Season', value: data.season || '—' },
+    { label: '🧠 Personality', value: data.personality || '—' },
+    { label: '💼 Dream Career', value: data.career || '—' },
+    { label: '🌍 Wants to Visit', value: data.travel || '—' },
+    { label: '💭 Feeling Now', value: data.feeling || '—', full: false },
+    { label: '🎯 Biggest Goal', value: data.goal || '—', full: true },
+  ];
+
+  document.getElementById('summary-grid').innerHTML = items.map(item => `
+    <div class="summary-item ${item.full ? 'summary-full' : ''}">
+      <div class="s-label">${item.label}</div>
+      <div class="s-value">${item.value}</div>
+    </div>
+  `).join('');
+
+  // This or That summary
+  if(data.totAnswers && data.totPairs) {
+    const totSummary = Object.keys(data.totAnswers).map(i => {
+      const pair = data.totPairs[i];
+      const choice = data.totAnswers[i];
+      return pair ? pair[choice] : '';
+    }).filter(Boolean).join(' · ');
+    if(totSummary) {
+      document.getElementById('summary-grid').innerHTML += `
+        <div class="summary-item summary-full">
+          <div class="s-label">⚡ This or That picks</div>
+          <div class="s-value" style="font-size:13px">${totSummary}</div>
+        </div>
+      `;
+    }
+  }
+}
+
+function formatDate(d) {
+  if(!d) return '—';
+  try {
+    return new Date(d + 'T00:00:00').toLocaleDateString('en-US', { day:'numeric', month:'long', year:'numeric' });
+  } catch(e) { return d; }
+}
+
+// ── CONFETTI / FIREWORKS ──
+function fireworks() {
+  const colors = ['#f4a7b9','#c9b8f0','#fde8ef','#e879a0','#a78bda','#fff','#ffeaa7'];
+  for(let i = 0; i < 80; i++) {
+    setTimeout(() => {
+      const piece = document.createElement('div');
+      piece.className = 'confetti-piece';
+      piece.style.cssText = `
+        left:${Math.random()*100}vw;
+        width:${6 + Math.random()*8}px;
+        height:${6 + Math.random()*8}px;
+        background:${colors[Math.floor(Math.random()*colors.length)]};
+        border-radius:${Math.random()>0.5?'50%':'3px'};
+        animation-duration:${2 + Math.random()*3}s;
+        animation-delay:${Math.random()*0.5}s;
+        opacity:${0.7+Math.random()*0.3};
+      `;
+      document.body.appendChild(piece);
+      setTimeout(() => piece.remove(), 5000);
+    }, i * 30);
+  }
+}
+
+// ── CANVAS HEARTS + PARTICLES ──
+const canvas = document.getElementById('bg-canvas');
+const ctx = canvas.getContext('2d');
+let W, H, particles = [];
+
+function resize() {
+  W = canvas.width = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+class Particle {
+  constructor() { this.reset(true); }
+  reset(init = false) {
+    this.x = Math.random() * W;
+    this.y = init ? Math.random() * H : H + 20;
+    this.size = 8 + Math.random() * 14;
+    this.speed = 0.3 + Math.random() * 0.7;
+    this.opacity = 0.08 + Math.random() * 0.18;
+    this.drift = (Math.random() - 0.5) * 0.4;
+    this.type = Math.random() < 0.6 ? 'heart' : 'petal';
+    this.rotation = Math.random() * Math.PI * 2;
+    this.rotSpeed = (Math.random() - 0.5) * 0.02;
+    this.hue = Math.random() < 0.5 ? 340 : 270; // pink or purple
+  }
+  update() {
+    this.y -= this.speed;
+    this.x += this.drift;
+    this.rotation += this.rotSpeed;
+    if(this.y < -30) this.reset();
+  }
+  draw() {
+    ctx.save();
+    ctx.translate(this.x, this.y);
+    ctx.rotate(this.rotation);
+    ctx.globalAlpha = this.opacity;
+    if(this.type === 'heart') {
+      drawHeart(ctx, 0, 0, this.size, `hsl(${this.hue},80%,75%)`);
+    } else {
+      drawPetal(ctx, 0, 0, this.size, `hsl(${this.hue},60%,80%)`);
+    }
+    ctx.restore();
+  }
+}
+
+function drawHeart(c, x, y, s, color) {
+  c.fillStyle = color;
+  c.beginPath();
+  c.moveTo(x, y + s * 0.3);
+  c.bezierCurveTo(x, y, x - s, y, x - s, y + s * 0.3);
+  c.bezierCurveTo(x - s, y + s * 0.6, x, y + s * 0.9, x, y + s);
+  c.bezierCurveTo(x, y + s * 0.9, x + s, y + s * 0.6, x + s, y + s * 0.3);
+  c.bezierCurveTo(x + s, y, x, y, x, y + s * 0.3);
+  c.fill();
+}
+
+function drawPetal(c, x, y, s, color) {
+  c.fillStyle = color;
+  c.beginPath();
+  c.ellipse(x, y, s * 0.4, s, 0, 0, Math.PI * 2);
+  c.fill();
+}
+
+for(let i = 0; i < 24; i++) particles.push(new Particle());
+
+function animateCanvas() {
+  ctx.clearRect(0, 0, W, H);
+  particles.forEach(p => { p.update(); p.draw(); });
+  requestAnimationFrame(animateCanvas);
+}
+animateCanvas();
+
+// ── DARK MODE ──
+const darkBtn = document.getElementById('dark-toggle');
+let isDark = data.dark || false;
+if(isDark) document.body.setAttribute('data-dark','');
+darkBtn.textContent = isDark ? '☀️' : '🌙';
+
+darkBtn.onclick = () => {
+  isDark = !isDark;
+  if(isDark) document.body.setAttribute('data-dark',''); 
+  else document.body.removeAttribute('data-dark');
+  darkBtn.textContent = isDark ? '☀️' : '🌙';
+  data.dark = isDark;
+  save();
+};
+
+// ── WHATSAPP SHARE ──
+function shareWhatsApp() {
+  const name = data.name || 'Cattie';
+  const text = encodeURIComponent(`💗 I just filled out "${name}'s" about-me page! So magical ✨`);
+  window.open(`https://wa.me/?text=${text}`, '_blank');
+}
+
+// ── DOWNLOAD SUMMARY ──
+function downloadSummary() {
+  const name = data.name || 'Cattie';
+  const lines = [
+    `╔══════════════════════════════════════╗`,
+    `║   About ${name.padEnd(30,' ')}║`,
+    `╚══════════════════════════════════════╝`,
+    ``,
+    `Name: ${data.name || '—'}`,
+    `Nickname: ${data.nickname || '—'}`,
+    `Birthday: ${formatDate(data.birthday)}`,
+    `City: ${data.city || '—'}`,
+    `Fave Emoji: ${data.emoji || '—'}`,
+    `Personality: ${data.personality || '—'}`,
+    ``,
+    `── FAVORITES ──`,
+    `Food: ${data.food || '—'}`,
+    `Color: ${data.color || '—'}`,
+    `Movie/Show: ${data.movie || '—'}`,
+    `Song/Artist: ${data.song || '—'}`,
+    `Celebrity: ${data.celeb || '—'}`,
+    `Place: ${data.place || '—'}`,
+    `Season: ${data.season || '—'}`,
+    ``,
+    `── DREAMS & GOALS ──`,
+    `Career Dream: ${data.career || '—'}`,
+    `Travel Wish: ${data.travel || '—'}`,
+    `Biggest Goal: ${data.goal || '—'}`,
+    `This Year: ${data.thisyear || '—'}`,
+    `Wants to Learn: ${data.learn || '—'}`,
+    ``,
+    `── THIS OR THAT ──`,
+    data.totPairs && data.totAnswers ? Object.keys(data.totAnswers).map(i => {
+      const pair = data.totPairs[i];
+      const choice = data.totAnswers[i];
+      return pair ? `${pair[0]} vs ${pair[1]}: ${pair[choice]}` : '';
+    }).filter(Boolean).join('\n') : '—',
+    ``,
+    `── SECRET MESSAGE ──`,
+    data.secret || '(kept private 🔒)',
+    ``,
+    `Feeling: ${data.feeling || '—'}`,
+    ``,
+    `────────────────────────────────────`,
+    `Made with ❤️ — about cattie`,
+  ].join('\n');
+
+  const blob = new Blob([lines], { type: 'text/plain;charset=utf-8' });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement('a');
+  a.href = url; a.download = `about-${name.toLowerCase().replace(/\s+/g,'-')}.txt`;
+  a.click(); URL.revokeObjectURL(url);
+}
+
+// ── RESET ──
+function resetAll() {
+  qCurrent = 0;
+  qAnswers = [];
+  totAnswers = {};
+  photos = [];
+  data = {};
+  save();
+  renderQuestion();
+  renderToT();
+  renderPhotos();
+  restoreAbout();
+  restoreFavorites();
+  restoreDreams();
+  twI = 0;
+  typeWrite();
+}
+
+// ── COMPLIMENT when entering favorites ──
+document.getElementById('favorites').addEventListener('transitionend', () => {
+  const cs = ['You have such great taste! 🌸','I have a feeling your favorites are stunning ✨','Curious to know everything about you 💕'];
+  document.getElementById('favorites-compliment').textContent = cs[Math.floor(Math.random()*cs.length)];
+});
+
+// Auto-restore final if data exists
+if(Object.keys(data).length > 2) {
+  setTimeout(buildFinal, 100);
+}
+
+</script>
+</body>
+</html>
